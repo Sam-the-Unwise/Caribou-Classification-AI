@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Nov 12 15:22:58 2019
+Created on Tue Dev 7 2:56:12 2019
 
-@author: Keenan
+@author: Samantha
 """
 
 import os
@@ -10,15 +10,15 @@ import numpy as np
 from keras.preprocessing.image import ImageDataGenerator, load_img, img_to_array
 from keras.models import Sequential, load_model
 
-model_path = './models/model.h5'
-model_weights_path = './models/weights.h5'
+model_path = 'models/model.h5'
+model_weights_path = 'models/weights.h5'
 #test_path = './dataset/test2/single_prediction'
-test_path = './dataset/single_prediction'
+test_path = 'dataset/single_prediction'
 
 model = load_model(model_path)
 model.load_weights(model_weights_path)
 
-img_width, img_height = 64, 64
+img_width, img_height = 50, 50
 
 def predict(file):
     x = load_img(file, target_size=(img_width,img_height))
@@ -33,13 +33,15 @@ def predict(file):
         print("Predicted Cat")
     elif answer == 1:
         #print("Predicted dog running")
-        print("Predicted Panda")
+        print("Predicted Dog")
     elif answer == 2:
         #print("Predicted dog sitting")
-        print("Predicted Shark")
+        print("Predicted Duck")
     elif answer == 3:
         #print("Predicted dog sleeping")
-        print("Predicted Snake")
+        print("Predicted Koala")
+    else:
+        print("Unable to predict specimen. Need further training")
         
     return answer
 

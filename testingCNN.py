@@ -36,12 +36,19 @@ def predict(file):
         print("Predicted Dog")
     elif answer == 2:
         #print("Predicted dog sitting")
+<<<<<<< Updated upstream:executeTest.py
         print("Predicted Duck")
     elif answer == 3:
         #print("Predicted dog sleeping")
         print("Predicted Koala")
     else:
         print("Unable to predict specimen. Need further training")
+=======
+        print("Predicted Ducks")
+    elif answer == 3:
+        #print("Predicted dog sleeping")
+        print("Predicted Koala")
+>>>>>>> Stashed changes:executeTest.py
         
     return answer
 

@@ -31,24 +31,9 @@ IMAGE_DIMENSION_Y = 50
 classifier = Sequential()
 
 # # Step 1 - Convolution
-#classifier.add(Conv2D(36, (3, 3), input_shape = (IMAGE_DIMENSION_X, IMAGE_DIMENSION_Y, 3), activation = 'relu'))
 classifier.add(Conv2D(3, (1, 1), input_shape = (IMAGE_DIMENSION_X, IMAGE_DIMENSION_Y, 3), activation = 'relu'))
 
 # # Step 2 - Pooling
-# classifier.add(MaxPooling2D(pool_size = (4, 4)))
-
-# # Adding a second convolutional layer
-# classifier.add(Conv2D(36, (3, 3), activation = 'relu'))
-# classifier.add(MaxPooling2D(pool_size = (4, 4)))
-
-# # Adding a third convolutional layer
-# classifier.add(Conv2D(36, (3, 3), activation = 'relu'))
-# classifier.add(MaxPooling2D(pool_size = (4, 4)))
-
-# # Adding a fourth convolutional layer
-# classifier.add(Conv2D(36, (3, 3), activation = 'relu'))
-# classifier.add(MaxPooling2D(pool_size = (4, 4)))
-
 
 #classifier.add(Conv2D(3, (1, 1), activation='relu'))
 classifier.add(Conv2D(12, (5, 5), activation='relu'))

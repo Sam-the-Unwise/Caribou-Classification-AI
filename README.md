@@ -32,6 +32,8 @@ pip install  tensorflow, Keras, numpy, os, math, random
 ```
 <i> please note that for our model we had to download specific things that needed to be added to the Keras library but as many of these were different for our individual machines, I have chosen to leave them off </i>
 
+# The below files can be found beneath the folder "source" -- A copy of these descriptions has been made in this files own README for convenience
+
 ### trainingCNN.py
 
 This script contains all the methods necessary for training the AI. This script creates the CNN model and then trains the CNN based on the images that have been placed in the 'Dataset/training' folder. While training the CNN, the program will also test the CNN for accuracy using images from the 'Dataset/test' folder, which will allow the program to display an accuracy of how well the model is predicting. The data of the model is then saved underneath the folder 'models' in the files 'model.h5' and 'weights.h5'.
@@ -41,12 +43,6 @@ This script contains all the methods necessary for training the AI. This script 
 ### testingCNN.py
 
 This script contains all the necessary methods for testing our AI against desired photoes. The program accesses the folder 'Dataset/single_prediction' and tests each of the pictures in the folder against the saved model. The program will then output a prediction of what it thinks the picture is of (between the choices of cat, dog, duck, and koala).
-
-### Team notes
-
-Our reasoning behind choosing these animals is because cats, dogs, and koalas look very similar while ducks look very different. We chose to use these because, while testing the model, we could see specifically if it was giving the wrong prediction because the animals simply looked similar or because the model hadn't been trained correctly (should that mean too small of a data set, not enough epochs, a small training batch size, etc.)
-
-We left the model at 78% accuracy for now because of the sole reason that this current model takes about 12 hours to run on our computers, but the model can indeed be made to be accurate further. This will be a continued project by us as we attempt to see how accurate we can make our model.
 
 
 # Authors

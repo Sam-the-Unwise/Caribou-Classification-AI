@@ -11,9 +11,11 @@ import os
 import math
 import random
 
-TRAIN_BATCH_SIZE = 3000
-TEST_BATCH_SIZE = 100
-EPOCH_SIZE = 25
+originalPath = os.getcwd()
+
+TRAIN_BATCH_SIZE = 50
+TEST_BATCH_SIZE = 10
+EPOCH_SIZE = 1
 
 IMAGE_DIMENSION_X = 50
 IMAGE_DIMENSION_Y = 50
@@ -31,9 +33,24 @@ IMAGE_DIMENSION_Y = 50
 classifier = Sequential()
 
 # # Step 1 - Convolution
+#classifier.add(Conv2D(36, (3, 3), input_shape = (IMAGE_DIMENSION_X, IMAGE_DIMENSION_Y, 3), activation = 'relu'))
 classifier.add(Conv2D(3, (1, 1), input_shape = (IMAGE_DIMENSION_X, IMAGE_DIMENSION_Y, 3), activation = 'relu'))
 
 # # Step 2 - Pooling
+# classifier.add(MaxPooling2D(pool_size = (4, 4)))
+
+# # Adding a second convolutional layer
+# classifier.add(Conv2D(36, (3, 3), activation = 'relu'))
+# classifier.add(MaxPooling2D(pool_size = (4, 4)))
+
+# # Adding a third convolutional layer
+# classifier.add(Conv2D(36, (3, 3), activation = 'relu'))
+# classifier.add(MaxPooling2D(pool_size = (4, 4)))
+
+# # Adding a fourth convolutional layer
+# classifier.add(Conv2D(36, (3, 3), activation = 'relu'))
+# classifier.add(MaxPooling2D(pool_size = (4, 4)))
+
 
 #classifier.add(Conv2D(3, (1, 1), activation='relu'))
 classifier.add(Conv2D(12, (5, 5), activation='relu'))
@@ -43,13 +60,15 @@ classifier.add(MaxPooling2D(pool_size = (2, 2)))
 classifier.add(Conv2D(24, (3, 3), activation='relu'))
 classifier.add(MaxPooling2D(pool_size = (2, 2)))
 classifier.add(Conv2D(48, (3, 3), activation='relu'))
+#classifier.add(MaxPooling2D(pool_size = (2, 2)))
+#classifier.add(Conv2D(64, (3, 3), activation='relu'))
 
 # Step 3 - Flattening
 classifier.add(Flatten())
 
 # Step 4 - Full connection
 classifier.add(Dense(units = 128, activation = 'relu'))
-classifier.add(Dense(4, activation = 'softmax'))
+classifier.add(Dense(5, activation = 'softmax'))
 
 
 # classifier.add(Lambda(lambda x: x / 255.0 - 0.5, input_shape = INPUT_SHAPE))
@@ -74,13 +93,13 @@ train_datagen = ImageDataGenerator(rescale = None, #= 1./255,
                                     
 test_datagen = ImageDataGenerator(rescale = None)#1./255)
 
-training_set = train_datagen.flow_from_directory('dataset/training_set',
+training_set = train_datagen.flow_from_directory(originalPath+'/dataset/training_set_frames/',
                                                    target_size = (IMAGE_DIMENSION_X, IMAGE_DIMENSION_Y),
                                                    batch_size = 64,
                                                    class_mode = 'categorical')
 
 
-test_set = test_datagen.flow_from_directory('dataset/test_set',
+test_set = test_datagen.flow_from_directory(originalPath+'/dataset/validation_set_frames/',
                                            target_size = (IMAGE_DIMENSION_X, IMAGE_DIMENSION_Y),
                                            batch_size = 64,
                                            class_mode = 'categorical')
@@ -97,7 +116,7 @@ classifier.fit_generator(training_set,
                             validation_data = test_set,
                             validation_steps = TEST_BATCH_SIZE) 
 
-target_dir = 'models/'
+target_dir = './models/'
 
-classifier.save('models/model.h5')
-classifier.save_weights('models/weights.h5')
+classifier.save('./models/model.h5')
+classifier.save_weights('./models/weights.h5')

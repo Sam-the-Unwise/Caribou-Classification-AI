@@ -10,6 +10,7 @@ import pathlib
 originalPath = os.getcwd()
 
 
+
 #This program splits each category into 80% training and 20% validation
 
 def getFileNumberOfExcellent():
@@ -61,7 +62,7 @@ def moveRemainingOfExcellentToTraining():
 ## GOOD
 def moveGoodToValidation( amount ):
     currentDir = originalPath+"/VideosBeforeSort/Good/"
-    destinationDir = originalPath+"/VideosBeforeSort/dataset/validation_set/good/"
+    destinationDir = originalPath+"/dataset/validation_set/good/"
     #path = str(pathlib.Path().absolute())
     fileArr = os.listdir(originalPath+"/VideosBeforeSort/Good")
     if( amount > 0 ):
@@ -74,7 +75,7 @@ def moveGoodToValidation( amount ):
 def moveRemainingOfGoodToTraining():
     total = getFileNumberOfGood()
     currentDir = originalPath+"/VideosBeforeSort/Good/"
-    destinationDir = originalPath+"/VideosBeforeSort/dataset/training_set/good/"
+    destinationDir = originalPath+"/dataset/training_set/good/"
     #path = str(pathlib.Path().absolute())
     fileArr = os.listdir(originalPath+"/VideosBeforeSort/Good")
     if(total > 0):
@@ -87,7 +88,7 @@ def moveRemainingOfGoodToTraining():
 ## FAIR
 def moveFairToValidation( amount ):
     currentDir = originalPath+"/VideosBeforeSort/Fair/"
-    destinationDir = originalPath+"/VideosBeforeSort/dataset/validation_set/fair/"
+    destinationDir = originalPath+"/dataset/validation_set/fair/"
     #path = str(pathlib.Path().absolute())
     fileArr = os.listdir(originalPath+"/VideosBeforeSort/Fair")
     if( amount > 0 ):
@@ -98,9 +99,9 @@ def moveFairToValidation( amount ):
         return 0
         
 def moveRemainingOfFairToTraining():
-    total = getFileNumberOfGood()
+    total = getFileNumberOfFair()
     currentDir = originalPath+"/VideosBeforeSort/Fair/"
-    destinationDir = originalPath+"/VideosBeforeSort/dataset/training_set/fair/"
+    destinationDir = originalPath+"/dataset/training_set/fair/"
     #path = str(pathlib.Path().absolute())
     fileArr = os.listdir(originalPath+"/VideosBeforeSort/Fair")
     if(total > 0):
@@ -111,7 +112,7 @@ def moveRemainingOfFairToTraining():
 ## POOR          
 def movePoorToValidation( amount ):
     currentDir = originalPath+"/VideosBeforeSort/Poor/"
-    destinationDir = originalPath+"/VideosBeforeSort/dataset/validation_set/poor/"
+    destinationDir = originalPath+"/dataset/validation_set/poor/"
     #path = str(pathlib.Path().absolute())
     fileArr = os.listdir(originalPath+"/VideosBeforeSort/Poor")
     if( amount > 0 ):
@@ -122,9 +123,10 @@ def movePoorToValidation( amount ):
         return 0
         
 def moveRemainingOfPoorToTraining():
-    total = getFileNumberOfGood()
+    print("WORKING ON POOR TRAINING")
+    total = getFileNumberOfPoor()
     currentDir = originalPath+"/VideosBeforeSort/Poor/"
-    destinationDir = originalPath+"/VideosBeforeSort/dataset/training_set/poor/"
+    destinationDir = originalPath+"/dataset/training_set/poor/"
     #path = str(pathlib.Path().absolute())
     fileArr = os.listdir(originalPath+"/VideosBeforeSort/Poor")
     if(total > 0):
@@ -134,7 +136,7 @@ def moveRemainingOfPoorToTraining():
 ## Obstructed
 def moveObstructedToValidation( amount ):
     currentDir = originalPath+"/VideosBeforeSort/ExtremelyObstructed/"
-    destinationDir = originalPath+"/VideosBeforeSort/dataset/validation_set/extremelyObstructed/"
+    destinationDir = originalPath+"/dataset/validation_set/extremelyObstructed/"
     #path = str(pathlib.Path().absolute())
     fileArr = os.listdir(originalPath+"/VideosBeforeSort/ExtremelyObstructed")
     if( amount > 0 ):
@@ -145,9 +147,9 @@ def moveObstructedToValidation( amount ):
         return 0
         
 def moveRemainingOfObstructedToTraining():
-    total = getFileNumberOfGood()
+    total = getFileNumberOfObstructed()
     currentDir = originalPath+"/VideosBeforeSort/ExtremelyObstructed/"
-    destinationDir = originalPath+"/VideosBeforeSort/dataset/training_set/extremelyObstructed/"
+    destinationDir = originalPath+"/dataset/training_set/extremelyObstructed/"
     #path = str(pathlib.Path().absolute())
     fileArr = os.listdir(originalPath+"/VideosBeforeSort/ExtremelyObstructed")
     if(total > 0):

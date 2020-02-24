@@ -51,7 +51,7 @@ def selectFolder( videoQuality ):
         return 0
     
 def checkFileExists( file ):
-    os.chdir(originalPath+'/downloads')
+    os.chdir(originalPath+'/Downloads')
     boolean = os.path.isfile( file )
     os.chdir(originalPath)
     return boolean

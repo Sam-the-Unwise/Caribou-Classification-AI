@@ -13,8 +13,8 @@ import random
 
 originalPath = os.getcwd()
 
-TRAIN_BATCH_SIZE = 50
-TEST_BATCH_SIZE = 10
+TRAIN_BATCH_SIZE = 5225
+TEST_BATCH_SIZE = 1653
 EPOCH_SIZE = 1
 
 IMAGE_DIMENSION_X = 50

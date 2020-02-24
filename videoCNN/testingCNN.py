@@ -81,25 +81,20 @@ def somethingForPrediction():
                 
 
                 
-            twentyFivePercent = int(imageArrLen/4)
-            fiftyPercent = int(imageArrLen/2)
-            excellentScore = (imageArrLen*4)-(twentyFivePercent*4)
-            goodScore = (imageArrLen*3)-(fiftyPercent*3)
-            fairScore = (imageArrLen*2)-(fiftyPercent*2)
-            poorScore = (imageArrLen*1)-(fiftyPercent*1)
-            if(score >= excellentScore):
+      
+            if(round(score/18) == 4):
+                print(round(score/18))
                 score = 0
                 os.replace(currentDir+videoFile, originalPath+"/output/Excellent/"+videoFile)
                 print("\n\n\nThe video,"+videoFile+", has been classified as excellent\n\n\n")
-            elif(score < excellentScore and score > goodScore):
+            elif(round(score/18) == 3 or round(score/18) == 2 ):
+                print(round(score/18))
                 score = 0
                 os.replace(currentDir+videoFile, originalPath+"/output/Good_to_Fair/"+videoFile)
                 print("\n\n\nThe video,"+videoFile+", has been classified as good\n\n\n")
-            elif(score < goodScore and score >= fairScore ):
-                score = 0
-                os.replace(currentDir+videoFile, originalPath+"/output/Good_to_Fair/"+videoFile)                
-                print("\n\n\nThe video,"+videoFile+", has been classified as fair\n\n\n")            
-            elif(score < fairScore and score >= poorScore ):
+           
+            elif(round(score/18) == 1 ):
+                print(round(score/18))
                 score = 0
                 os.replace(currentDir+videoFile, originalPath+"/output/Poor/"+videoFile)
                 print("\n\n\nThe video,"+videoFile+", has been classified as poor\n\n\n")

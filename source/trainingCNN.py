@@ -94,5 +94,16 @@ test_set = test_datagen.flow_from_directory(validation_path,
                                     batch_size = 64,
                                     class_mode = 'categorical')
 
+#we want to avoid over fitting because that gives false accuracy
+#   than normally is shown if accuracy is far off from val_accuracy.
+#   The real accuracy is about when the accuracy and val accuracy converge.
+classifier.fit_generator(training_set,
+                            #NOTE==========Mess with batch sizes to find best accuracy
+                            steps_per_epoch = TRAIN_BATCH_SIZE, #train_len//TRAIN_BATCH_SIZE
+                            #mess around with epochs to find a better accuracy
+                            epochs = EPOCH_SIZE,
+                            validation_data = test_set,
+                            validation_steps = TEST_BATCH_SIZE) 
+
 classifier.save(TARGET_DIR + 'model.h5')
 classifier.save_weights(TARGET_DIR + 'weights.h5')

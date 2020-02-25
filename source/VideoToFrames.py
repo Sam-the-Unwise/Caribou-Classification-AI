@@ -1,9 +1,13 @@
-# -*- coding: utf-8 -*-
 """
-Created on Wed Jan 29 14:37:03 2020
+AUTHOR: Keenan Swanson
 
-@author: Keenan
+EDITOR: Samantha Muellner
+
+DESCRIPTION: script that will test our unknown videos against the saved CNN model
+
+VERSION: 1.0.1v
 """
+
 import cv2
 count = 0
 sec = 0
@@ -11,10 +15,13 @@ vidLen = 0
 expectedFrames = 18
 
 def getVidDuration( videoFile ):
+
     video = cv2.VideoCapture( videoFile )
     fps = video.get(cv2.CAP_PROP_FPS)
+
     framesCount = video.get(cv2.CAP_PROP_FRAME_COUNT)
     length = int(framesCount/fps)
+
     return length
 
 vidLen = getVidDuration( '1179_20180822_155018.mp4' )

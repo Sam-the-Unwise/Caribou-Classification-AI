@@ -36,9 +36,12 @@ pip install  tensorflow, Keras, numpy, os, math, random
 
 ### deleteVideoFrames.py
 
+A script that will go through the folders our video frames have been saved in and delete them once training the model has been finished
+
+
 ### organizingTrainAndValidation.py
 
-This script will be used when new data has been introduced into...
+This script is only used to separate data that has already been classified into the train and validation datasets. It will sort 20% of the data into the validation set and 80% of the data into the training set.
 
 
 ### runCNN.py
@@ -51,6 +54,7 @@ This is our <b>main</b> script that will run all the code from other files
 This script contains all the necessary methods to split our videos into frames. This script is specifically used for the <i> training </i> and <i> validation </i> data as we need to save these frames for a longer period of time than the testing frames. For splitting testing videos into frames, please reference <i> testingVideosToFrames.py </i>. 
 
 This script will split the videos into the desired amount of frames and save them each to the according folder (for example, a frame from '../dataset/training_set/Excellent' will be saved to '../dataset/training_set_frames/Excellent'). These frames will then be deleted by <i>deleteVideoFrames.py</i>
+
 
 ### testingCNN.py
 
@@ -72,6 +76,9 @@ This script contains all the methods necessary for training the AI. This script 
 
 
 ### variables.py
+
+A helpful script that contains all the common variables used throughout the other program files in this repository. If anyone is to change the names of their folder locations, they should change them in this script and only this script.
+
 
 
 # Authors

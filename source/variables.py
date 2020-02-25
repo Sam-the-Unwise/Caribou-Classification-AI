@@ -23,6 +23,7 @@ EXTREMELY_OBSTRUCTED_FOLDER = "Extremely_Obstructed/"
 GOOD_FOLDER = "Good_to_fair/"
 POOR_FOLDER = "Poor/"
 
+TARGET_DIR = './models/'
 MODEL_PATH = './models/model.h5'
 MODEL_WEIGHTS_PATH = './models/weights.h5'
 TEST_PATH = "./dataset/testing_set"

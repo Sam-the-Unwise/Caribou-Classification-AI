@@ -12,6 +12,7 @@ from organizingTrainAndValidation import organizeVideos
 from splitVideosIntoFrames import splitVideos
 from trainingCNN import trainAndValidateCNN
 from testingCNN import testCNN
+from delete import deleteTrainAndVal
 # import code that will delete the videos
 
 ###############################################################################
@@ -35,3 +36,6 @@ def main():
     
     trainAndValidateCNN()
     testCNN()
+
+    # delete frames
+    deleteTrainAndVal()

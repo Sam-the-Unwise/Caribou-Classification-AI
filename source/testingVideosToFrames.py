@@ -1,17 +1,23 @@
 ###############################################################################
 # AUTHOR: Keenan Swanson
 #
+# EDITOR: Samantha Muellner
+#
 # DESCRIPTION: file that will split videos into frames, save them in an array
 #           for easy access, and delete the array when necessary
 #
 # VERSION: 1.0.0
 ###############################################################################
-import cv2,os
+import cv2, os
+import variables
+
+# declare variables
 COUNT = 0
 SEC = 0
 vidLen = 0
-EXPECTED_FRAMES = 18
+EXPECTED_FRAMES = variables.EXPECTED_FRAMES
 FRAME_ARRAY = []
+
 originalDir = os.getcwd()
 
 

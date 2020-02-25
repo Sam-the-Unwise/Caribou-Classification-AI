@@ -1,21 +1,14 @@
 #!/usr/bin/env python
 import os, shutil
+import variables
 
 
-TEST_EXCELLENT_FRAME_PATH = "../dataset/testing_set_frames/Excellent/"
-
-# decalre variables and paths
-INPUT_PATH_TRAINING = "../dataset/training_set/"
-INPUT_PATH_VALIDATION = "../dataset/validation_set/"
-
-OUTPUT_PATH_TRAINING = "../dataset/training_set_frames/"
-OUTPUT_PATH_VALIDATION = "../dataset/validation_set_frames/"
-
-PATH_EXCELLENT = "Excellent/"
-PATH_GOOD = "Good_to_fair/"
-PATH_POOR = "Poor/"
-PATH_EXTREMELY_OBSTRUCTED = "Extremely_Obstructed/"
-
+###############################################################################
+# FUNCTION NAME: deleteFramesInFolder
+# WHAT IT DOES: function that will loop through the provided folder path and 
+#			delete all the frames
+# RETURN: none
+###############################################################################
 
 def deleteFramesInFolder(folderPath):
 	file_list = os.listdir(folderPath)
@@ -29,3 +22,29 @@ def deleteFramesInFolder(folderPath):
 				shutil.rmtree(file_path)
 		except Exception as e:
 			print('Failed to delete %s. Reason: %s' % (file_path, e))
+
+###############################################################################
+# FUNCTION NAME: deleteTrainAndVal
+# WHAT IT DOES: function that will pass in all the folder paths that need their
+#			frames deleted
+# RETURN: none
+###############################################################################
+
+def deleteTrainAndVal():
+	# delete all excellent #
+	deleteFramesInFolder(variables.OUTPUT_TRAINING_PATH + variables.EXCELLENT_FOLDER)
+	deleteFramesInFolder(variables.OUTPUT_VALIDATION_PATH + variables.EXCELLENT_FOLDER)
+
+	# delete all extremely obstructed #
+	deleteFramesInFolder(variables.OUTPUT_TRAINING_PATH + variables.EXTREMELY_OBSTRUCTED_FOLDER)
+	deleteFramesInFolder(variables.OUTPUT_VALIDATION_PATH + variables.EXTREMELY_OBSTRUCTED_FOLDER)
+
+	# delete all good #
+	deleteFramesInFolder(variables.OUTPUT_TRAINING_PATH + variables.GOOD_FOLDER)
+	deleteFramesInFolder(variables.OUTPUT_VALIDATION_PATH + variables.GOOD_FOLDER)
+		
+	# delete all poor #
+	deleteFramesInFolder(variables.OUTPUT_TRAINING_PATH + variables.POOR_FOLDER)
+	deleteFramesInFolder(variables.OUTPUT_VALIDATION_PATH + variables.POOR_FOLDER)
+
+	

@@ -13,20 +13,22 @@ Which will produce a folder called data with the images. There will be 2000+ ima
 import cv2, os
 import re # Regular expression package
 import argparse # the package helps us parse and access our command line arguments.
+import variables
+
 
 # decalre variables and paths
-INPUT_PATH_TRAINING = "../dataset/training_set/"
-INPUT_PATH_VALIDATION = "../dataset/validation_set/"
+INPUT_PATH_TRAINING = variables.INPUT_TRAINING_PATH
+INPUT_PATH_VALIDATION = variables.INPUT_VALIDATION_PATH
 #INPUT_PATH_TEST = "../dataset/testing_set/"
 
-OUTPUT_PATH_TRAINING = "../dataset/training_set_frames/"
-OUTPUT_PATH_VALIDATION = "../dataset/validation_set_frames/"
+OUTPUT_PATH_TRAINING = variables.OUTPUT_TRAINING_PATH
+OUTPUT_PATH_VALIDATION = variables.OUTPUT_VALIDATION_PATH
 #INPUT_PATH_TEST = "../dataset/testing_set_frames/"
 
-PATH_EXCELLENT = "Excellent/"
-PATH_GOOD = "Good_to_fair/"
-PATH_POOR = "Poor/"
-PATH_EXTREMELY_OBSTRUCTED = "Extremely_Obstructed/"
+PATH_EXCELLENT = variables.EXCELLENT_FOLDER
+PATH_GOOD = variables.GOOD_FOLDER
+PATH_POOR = variables.POOR_FOLDER
+PATH_EXTREMELY_OBSTRUCTED = variables.EXTREMELY_OBSTRUCTED_FOLDER
 
 # create parameters that will tell the splitFrames function how many seconds to
 #   wait before splitting another frame from the video

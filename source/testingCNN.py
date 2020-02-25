@@ -1,7 +1,7 @@
 """
 AUTHOR: Samantha Muellner, Keenan Swanson
 
-DESCRIPTION: script that will test our unknown videos against the saved CNN model
+DESCRIPTION: script that will test our unknown videos against the saved CNN MODEL
 
 VERSION: 2.0.1v
 """
@@ -10,17 +10,25 @@ import os
 import numpy as np
 from keras.preprocessing.image import ImageDataGenerator, load_img, img_to_array
 from keras.models import Sequential, load_model
-
-originalPath = os.getcwd()
 import videoToFrames
 
-model_path = './models/model.h5'
-model_weights_path = './models/weights.h5'
-#test_path = './dataset/test2/single_prediction'
-test_path = './dataset/predictions'
+# define variables
+ORIGINAL_PATH = os.getcwd()
 
-model = load_model(model_path)
-model.load_weights(model_weights_path)
+MODEL_PATH = './models/model.h5'
+MODEL_WEIGHTS_PATH = './models/weights.h5'
+TEST_PATH = './dataset/predictions'
+
+EXCELLENT_OUTPUT_PATH = "./dataset/output/Excellent"
+EXTREMELY_OBSTRUCTED_OUTPUT_PATH = "./dataset/output/Extremely_Obstructed"
+GOOD_OUTPUT_PATH = "./dataset/output/Good_to_Fair"
+POOR_OUTPUT_PATH = "./dataset/output/Poor"
+
+
+
+
+MODEL = load_model(MODEL_PATH).load_weights(MODEL_WEIGHTS_PATH) # load our model
+
 
 img_width, img_height = 50, 50
 
@@ -30,14 +38,18 @@ GOOD = 2
 POOR = 3
 
 
-
-
+###############################################################################
+# FUNCTION NAME: predict
+# WHAT IT DOES: will provide the prediction for the provided video by splitting
+#           it into frames, analyzing each frame, and then averaging the results
+# RETURN: none
+###############################################################################
 def predict(file):
     x = load_img(file, target_size=(img_width,img_height))
     x = img_to_array(x)
     x = np.expand_dims(x, axis=0)
 
-    array = model.predict(x)
+    array = MODEL.predict(x)
 
     result = array[0]
     answer = np.argmax(result)
@@ -50,11 +62,11 @@ def predict(file):
 
     elif answer == EXTREMELY_OBSTRUCTED:
         print("Extremely Obstructed")
-        score += 0
+        score += 3
 
     elif answer == GOOD:
         print("Good")
-        score += 3
+        score += 2
 
     elif answer == POOR:
         print("Poor")
@@ -62,12 +74,17 @@ def predict(file):
 
     return score
 
-def somethingForPrediction():
+###############################################################################
+# FUNCTION NAME: testCNN
+# WHAT IT DOES: will test our CNN with the images in the provide file paths
+# RETURN: none
+###############################################################################
+def testCNN():
     print("\n\n Moving excellent test files to training images pic directory\n\n")
 
-    videoArr = os.listdir(originalPath+"./dataset/testing_set")
-    currentDir = originalPath+"./dataset/testing_set/"
-    videoToFrames.changeDir(originalPath)
+    videoArr = os.listdir(ORIGINAL_PATH+"./dataset/testing_set")
+    currentDir = ORIGINAL_PATH+"./dataset/testing_set/"
+    videoToFrames.changeDir(ORIGINAL_PATH)
 
     arrayLen = len( videoArr )
 
@@ -89,46 +106,52 @@ def somethingForPrediction():
             videoToFrames.getFrame(currentDir+videoFile, 0, frameRate, 1)
 
             imageArr = videoToFrames.getFrameArray()
-            videoToFrames.changeDir(originalPath)
+            videoToFrames.changeDir(ORIGINAL_PATH)
             imageArrLen = len( imageArr )
 
             for frame in range(imageArrLen):
-                #path = str(pathlib.Path().absolute())
                 imageOnlyArr = imageArr[frame]
                 print(imageOnlyArr)
 
-                os.chdir(originalPath)
+                os.chdir(ORIGINAL_PATH)
                 score += predict(imageOnlyArr)
-                os.chdir(originalPath)
+                os.chdir(ORIGINAL_PATH)
+            
+            video_dir_location = currentDir + videoFile
 
-
+            # GOOD #
             if(round(score/18) == 4):
                 print(round(score/18))
                 score = 0
 
-                os.replace(currentDir+videoFile, originalPath + "/output/Excellent/" + videoFile)
+                os.replace(video_dir_location, ORIGINAL_PATH + EXCELLENT_OUTPUT_PATH + videoFile)
                 print("\n\n\nThe video,"+videoFile+", has been classified as excellent\n\n\n")
 
+            # EXTREMELY OBSTRUCTED #
             elif(round(score/18) == 3 or round(score/18) == 2 ):
                 print(round(score/18))
                 score = 0
 
-                os.replace(currentDir+videoFile, originalPath + "/output/Good_to_Fair/" + videoFile)
-                print("\n\n\nThe video,"+videoFile+", has been classified as good\n\n\n")
-
+                os.replace(video_dir_location, ORIGINAL_PATH + EXTREMELY_OBSTRUCTED_OUTPUT_PATH + videoFile)
+                print("\n\n\nThe video," + videoFile + ", has been classified as extremely obstructed\n\n\n")
+                
+            # GOOD #
             elif(round(score/18) == 1 ):
                 print(round(score/18))
                 score = 0
 
-                os.replace(currentDir+videoFile, originalPath + "/output/Poor/" + videoFile)
-                print("\n\n\nThe video,"+videoFile+", has been classified as poor\n\n\n")
-                
+                os.replace(video_dir_location, ORIGINAL_PATH + GOOD_OUTPUT_PATH + videoFile)
+                print("\n\n\nThe video,"+videoFile+", has been classified as good\n\n\n")
+            
+            # POOR #
             else:
                 score = 0
 
-                os.replace(currentDir+videoFile, originalPath + "/output/Extremely_Obstructed/" + videoFile)
-                print("\n\n\nThe video," + videoFile + ", has been classified as extremely obstructed\n\n\n")
+                os.replace(video_dir_location, ORIGINAL_PATH + POOR_OUTPUT_PATH + videoFile)
+                print("\n\n\nThe video,"+videoFile+", has been classified as poor\n\n\n")
 
     #videoToFrames.getAllImagesNotDeleted(videoArr, currentDir)
     videoToFrames.deleteFiles(currentDir)
     return 0
+
+# testCNN()

@@ -14,7 +14,7 @@ import cv2, os
 import re # Regular expression package
 import argparse # the package helps us parse and access our command line arguments.
 
-
+# decalre variables and paths
 INPUT_PATH_TRAINING = "../dataset/training_set/"
 INPUT_PATH_VALIDATION = "../dataset/validation_set/"
 INPUT_PATH_TESTING = "../dataset/training_set/"

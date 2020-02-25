@@ -16,9 +16,9 @@ OUTPUT_VALIDATION_PATH = "../dataset/validation_set_frames/"
 
 
 ### PATHS FOR SORTING VIDEOS ###
-SORTING_VIDEOS_INPUT_PATH = "../VideosBeforeSort/SortedVideos/"
+SORTING_VIDEOS_INPUT_PATH = "../videosBeforeSort/SortedVideos/"
 SORTING_VIDEOS_OUTPUT_PATH = INPUT_TRAINING_PATH
-UNSORTED_VIDEO_INPUT_PATH = "../VideosBeforeSort/unsorted_videos/"
+UNSORTED_VIDEO_INPUT_PATH = "../videosBeforeSort/unsorted_videos/"
 VIDEO_OUTPUT_PATH = "../dataset/output/"
 
 ### EXTENSIONS ###

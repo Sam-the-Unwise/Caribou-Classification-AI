@@ -10,14 +10,15 @@ import os
 import numpy as np
 from keras.preprocessing.image import ImageDataGenerator, load_img, img_to_array
 from keras.models import Sequential, load_model
-import videoToFrames
+import testingVideosToFrames
 
 # define variables
 ORIGINAL_PATH = os.getcwd()
 
 MODEL_PATH = './models/model.h5'
 MODEL_WEIGHTS_PATH = './models/weights.h5'
-TEST_PATH = './dataset/predictions'
+TEST_PATH = "./dataset/testing_set"
+
 
 EXCELLENT_OUTPUT_PATH = "./dataset/output/Excellent"
 EXTREMELY_OBSTRUCTED_OUTPUT_PATH = "./dataset/output/Extremely_Obstructed"
@@ -81,10 +82,10 @@ def predict(file):
 ###############################################################################
 def testCNN():
     print("\n\n Moving excellent test files to training images pic directory\n\n")
-
-    videoArr = os.listdir(ORIGINAL_PATH+"./dataset/testing_set")
-    currentDir = ORIGINAL_PATH+"./dataset/testing_set/"
-    videoToFrames.changeDir(ORIGINAL_PATH)
+    
+    currentDir = ORIGINAL_PATH + TEST_PATH
+    videoArr = os.listdir(currentDir)
+    testingVideosToFrames.changeDir(ORIGINAL_PATH)
 
     arrayLen = len( videoArr )
 
@@ -92,21 +93,22 @@ def testCNN():
 
     if (arrayLen > 0):
 
+        ################### ANALYZE EACH VIDEO FOR A SCORE ####################
         for video in range(arrayLen):
 
-            videoToFrames.dumpArr()
+            testingVideosToFrames.dumpArr()
             videoFile = videoArr[ video ]
 
             print("\n\n Working on: \n\n")
-            print("\t"+videoFile+"\n")
+            print("\t" + videoFile + "\n")
 
-            videoToFrames.changeDir(currentDir)
+            testingVideosToFrames.changeDir(currentDir)
 
-            frameRate = videoToFrames.getFrameRate(videoFile, 18)
-            videoToFrames.getFrame(currentDir+videoFile, 0, frameRate, 1)
+            frameRate = testingVideosToFrames.getFrameRate(videoFile, 18)
+            testingVideosToFrames.getFrame(currentDir + videoFile, 0, frameRate, 1)
 
-            imageArr = videoToFrames.getFrameArray()
-            videoToFrames.changeDir(ORIGINAL_PATH)
+            imageArr = testingVideosToFrames.getFrameArray()
+            testingVideosToFrames.changeDir(ORIGINAL_PATH)
             imageArrLen = len( imageArr )
 
             for frame in range(imageArrLen):
@@ -119,13 +121,16 @@ def testCNN():
             
             video_dir_location = currentDir + videoFile
 
+
+            ###################### AVERAGE VIDEO RESULTS ######################
+
             # GOOD #
             if(round(score/18) == 4):
                 print(round(score/18))
                 score = 0
 
                 os.replace(video_dir_location, ORIGINAL_PATH + EXCELLENT_OUTPUT_PATH + videoFile)
-                print("\n\n\nThe video,"+videoFile+", has been classified as excellent\n\n\n")
+                print("\n\n\nThe video," +videoFile +", has been classified as excellent\n\n\n")
 
             # EXTREMELY OBSTRUCTED #
             elif(round(score/18) == 3 or round(score/18) == 2 ):
@@ -141,17 +146,17 @@ def testCNN():
                 score = 0
 
                 os.replace(video_dir_location, ORIGINAL_PATH + GOOD_OUTPUT_PATH + videoFile)
-                print("\n\n\nThe video,"+videoFile+", has been classified as good\n\n\n")
+                print("\n\n\nThe video," + videoFile + ", has been classified as good\n\n\n")
             
             # POOR #
             else:
                 score = 0
 
                 os.replace(video_dir_location, ORIGINAL_PATH + POOR_OUTPUT_PATH + videoFile)
-                print("\n\n\nThe video,"+videoFile+", has been classified as poor\n\n\n")
+                print("\n\n\nThe video," + videoFile + ", has been classified as poor\n\n\n")
 
-    #videoToFrames.getAllImagesNotDeleted(videoArr, currentDir)
-    videoToFrames.deleteFiles(currentDir)
+    #testingVideosToFrames.getAllImagesNotDeleted(videoArr, currentDir)
+    testingVideosToFrames.deleteFiles(currentDir)
     return 0
 
 # testCNN()

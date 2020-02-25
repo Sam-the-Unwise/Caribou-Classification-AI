@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 dataset\training_set\cats, dataset\training_set\dogs, dataset\traing_set\koalas, dataset\training_set\ducks
 *.jpg
 *.gif
@@ -8,3 +9,8 @@ dataset/test_set/cats/_DS_Store
 *.zip
 *.mp4
 *.xlsx
+=======
+
+*.mp4
+*.jpg
+>>>>>>> Stashed changes

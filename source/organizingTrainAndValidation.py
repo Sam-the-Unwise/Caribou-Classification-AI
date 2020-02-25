@@ -7,20 +7,34 @@
 # VERSION: 2.0.0v
 ###############################################################################
 
-import os
-import pathlib
+import os, pathlib
+import variables
 
 # declare variables
-EXCELLENT_INPUT_PATH = "../VideosBeforeSort/SortedVideos/Excellent/"
-EXTREMELY_OBSTRUCTED_INPUT_PATH = "../VideosBeforeSort/SortedVideos/Extremely_Obstructed/"
-GOOD_INPUT_PATH = "../VideosBeforeSort/SortedVideos/Good_to_Poor/"
-POOR_INPUT_PATH = "../VideosBeforeSort/SortedVideos/Poor/"
+EXCELLENT_INPUT_PATH = (variables.SORTING_VIDEOS_INPUT_PATH 
+                                                + variables.EXCELLENT_FOLDER)
 
-EXCELLENT_OUTPUT_PATH = "/dataset/training_set/Excellent/"
-EXTREMELY_OBSTRUCTED_OUTPUT_PATH = "/dataset/training_set/Extremely_Obstructed/"
-GOOD_OUTPUT_PATH = "/dataset/training_set/Good_to_Poor/"
-POOR_OUTPUT_PATH = "/dataset/training_set/Poor/"
+EXTREMELY_OBSTRUCTED_INPUT_PATH = (variables.SORTING_VIDEOS_INPUT_PATH 
+                                    + variables.EXTREMELY_OBSTRUCTED_FOLDER)
 
+GOOD_INPUT_PATH = (variables.SORTING_VIDEOS_INPUT_PATH 
+                                                    + variables.GOOD_FOLDER)
+
+POOR_INPUT_PATH = (variables.SORTING_VIDEOS_INPUT_PATH 
+                                                    + variables.POOR_FOLDER)
+
+
+EXCELLENT_OUTPUT_PATH = (variables.SORTING_VIDEOS_OUTPUT_PATH 
+                                                + variables.EXCELLENT_FOLDER)
+
+EXTREMELY_OBSTRUCTED_OUTPUT_PATH = (variables.SORTING_VIDEOS_OUTPUT_PATH 
+                                    + variables.EXTREMELY_OBSTRUCTED_FOLDER)
+
+GOOD_OUTPUT_PATH = (variables.SORTING_VIDEOS_OUTPUT_PATH 
+                                                    + variables.GOOD_FOLDER)
+                                                    
+POOR_OUTPUT_PATH = (variables.SORTING_VIDEOS_OUTPUT_PATH 
+                                                    + variables.POOR_FOLDER)
 
 
 originalPath = os.getcwd()

@@ -10,34 +10,20 @@ import os
 import numpy as np
 from keras.preprocessing.image import ImageDataGenerator, load_img, img_to_array
 from keras.models import Sequential, load_model
-import testingVideosToFrames
+import testingVideosToFrames, variables # import necessary files
 
 # define variables
 ORIGINAL_PATH = os.getcwd()
 
-MODEL_PATH = './models/model.h5'
-MODEL_WEIGHTS_PATH = './models/weights.h5'
-TEST_PATH = "./dataset/testing_set"
+EXCELLENT_OUTPUT_PATH = variables.VIDEO_OUTPUT_PATH + variables.EXCELLENT_FOLDER
+EXTREMELY_OBSTRUCTED_OUTPUT_PATH = variables.VIDEO_OUTPUT_PATH + variables.EXTREMELY_OBSTRUCTED_FOLDER
+GOOD_OUTPUT_PATH = variables.VIDEO_OUTPUT_PATH + variables.GOOD_FOLDER
+POOR_OUTPUT_PATH = variables.VIDEO_OUTPUT_PATH + variables.POOR_FOLDER
 
 
-EXCELLENT_OUTPUT_PATH = "./dataset/output/Excellent"
-EXTREMELY_OBSTRUCTED_OUTPUT_PATH = "./dataset/output/Extremely_Obstructed"
-GOOD_OUTPUT_PATH = "./dataset/output/Good_to_Fair"
-POOR_OUTPUT_PATH = "./dataset/output/Poor"
-
-
-
-
-MODEL = load_model(MODEL_PATH).load_weights(MODEL_WEIGHTS_PATH) # load our model
-
+MODEL = load_model(variables.MODEL_PATH).load_weights(variables.MODEL_WEIGHTS_PATH) # load our model
 
 img_width, img_height = 50, 50
-
-EXCELLENT = 0
-EXTREMELY_OBSTRUCTED = 1
-GOOD = 2
-POOR = 3
-
 
 ###############################################################################
 # FUNCTION NAME: predict
@@ -57,19 +43,19 @@ def predict(file):
 
     score = 0
 
-    if answer == EXCELLENT:
+    if answer == variables.EXCELLENT_CAT_NUMBER:
         print("Excellent")
         score += 4
 
-    elif answer == EXTREMELY_OBSTRUCTED:
+    elif answer == variables.EXTREMELY_OBSTRUCTED_CAT_NUMBER:
         print("Extremely Obstructed")
         score += 3
 
-    elif answer == GOOD:
+    elif answer == variables.GOOD_CAT_NUMBER:
         print("Good")
         score += 2
 
-    elif answer == POOR:
+    elif answer == variables.POOR_CAT_NUMBER:
         print("Poor")
         score += 1
 
@@ -83,7 +69,7 @@ def predict(file):
 def testCNN():
     print("\n\n Moving excellent test files to training images pic directory\n\n")
     
-    currentDir = ORIGINAL_PATH + TEST_PATH
+    currentDir = ORIGINAL_PATH + variables.TEST_PATH
     videoArr = os.listdir(currentDir)
     testingVideosToFrames.changeDir(ORIGINAL_PATH)
 

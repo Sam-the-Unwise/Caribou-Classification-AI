@@ -316,7 +316,7 @@ def checkAllDirectories():
 # WHAT IT DOES: runs all our previously declared functions
 # RETURN: none
 ###############################################################################
-def main():
+def splitVideos():
     
     ######################### GET TRAINING SET FRAMES #########################
     train_file_storage_excellent = getAllFile(INPUT_PATH_TRAINING + PATH_EXCELLENT)
@@ -378,7 +378,7 @@ def main():
         splitFrame(extremely_ob_file, OUTPUT_PATH_TESTING + PATH_EXTREMELY_OBSTRUCTED, SECONDS)
 
 
-main()
+#main()
 
 
 

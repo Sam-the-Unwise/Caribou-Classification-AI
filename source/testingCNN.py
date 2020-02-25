@@ -62,7 +62,7 @@ def predict(file):
 
     return score
 
-def somethingForPrediction():
+def testCNN():
     print("\n\n Moving excellent test files to training images pic directory\n\n")
 
     videoArr = os.listdir(originalPath+"./dataset/testing_set")
@@ -132,3 +132,5 @@ def somethingForPrediction():
     #videoToFrames.getAllImagesNotDeleted(videoArr, currentDir)
     videoToFrames.deleteFiles(currentDir)
     return 0
+
+# testCNN()

@@ -75,7 +75,7 @@ def moveToValidation(inputFilePath, outputFilePath ):
         return 0
 
 
-def main():
+def organizeVideos():
     # sort all excellent videos
     moveToValidation(EXCELLENT_INPUT_PATH, EXCELLENT_OUTPUT_PATH)
     moveRemainingOfToTraining(EXCELLENT_INPUT_PATH, EXCELLENT_OUTPUT_PATH)

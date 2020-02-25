@@ -1,7 +1,7 @@
-import xlrd 
-import shutil
+import xlrd, shutil
 from os import path
 import os
+import variables
 
 VIDEO_QUALITY = 7
 VIDEO_TITLE = 0
@@ -10,8 +10,8 @@ VIDEO_TITLE = 0
 VIDEO_NUMBER_THAT_VIDEO_CATEG_WAS_CHANGED_AT = 2543
 
 # set paths that videos will be obtained from and saved to
-UNSORTED_VIDEO_PATH = "./unsorted_videos/"
-SORTED_VIDEO_PATH = "./sort_videos/"
+UNSORTED_VIDEO_PATH = variables.UNSORTED_VIDEO_INPUT_PATH
+SORTED_VIDEO_PATH = variables.SORTING_VIDEOS_INPUT_PATH
 
 
 def access_excel(file_name):
@@ -47,8 +47,5 @@ def access_excel(file_name):
             else:
                 print("Have not obtained this video or information about this video")
                 
-
-
-
 
 access_excel("Caribou_data.xlsx")

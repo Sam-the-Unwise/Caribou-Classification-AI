@@ -18,11 +18,16 @@ This script is only used to separate data that has already been classified into 
 This is our <b>main</b> script that will run all the code from other files
 
 
+### sortPreclassifiedVideos.py
+
+This script is used to sort the preclassified videos (videos already classified by volunteers) into their correct folders based 
+
+
 ### splitVideosIntoFrames.py
 
 This script contains all the necessary methods to split our videos into frames. This script is specifically used for the <i> training </i> and <i> validation </i> data as we need to save these frames for a longer period of time than the testing frames. For splitting testing videos into frames, please reference <i> testingVideosToFrames.py </i>. 
 
-This script will split the videos into the desired amount of frames and save them each to the according folder (for example, a frame from '../dataset/training_set/Excellent' will be saved to '../dataset/training_set_frames/Excellent'). These frames will then be deleted by <i>deleteVideoFrames.py</i>
+This script will split the videos into the desired amount of frames and save them each to the according folder (for example, a frame from '../dataset/training_set/Excellent' will be saved to '../dataset/training_set_frames/Excellent'). These frames will then be deleted by <i>deleteVideoFrames.py</i> 
 
 
 ### testingCNN.py
@@ -44,7 +49,11 @@ This script contains all the methods necessary for training the AI. This script 
 <i> Note that with our current set up of 25 epochs, 3000 training batch size, and 100 test batch size, the model was roughly at 78% accuracy. </i>
 
 
+### unzip.py
+
+This is a script simply used by our team to unzip the files provided to us by our client and is not necessary to actually running the CNN
+
+
 ### variables.py
 
 A helpful script that contains all the common variables used throughout the other program files in this repository. If anyone is to change the names of their folder locations, they should change them in this script and only this script.
-

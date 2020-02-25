@@ -1,7 +1,9 @@
 import os, zipfile
+import variables
 
-dir_name = "/media/sam-the-unwise/Sentient Toaster/Caribou"
-output_folder = "/media/sam-the-unwise/Sentient Toaster/Caribou/Videos"
+dir_name = "../VideosBeforeSort/"
+output_folder = variables.UNSORTED_VIDEO_INPUT_PATH
+
 extension = ".zip"
 
 os.chdir(dir_name)

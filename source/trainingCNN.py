@@ -14,11 +14,26 @@ from keras.layers.core import Flatten, Dropout, Lambda
 from keras.preprocessing.image import ImageDataGenerator
 from keras.optimizers import Adam
 import tensorflow as tf
+import variables
 
 import numpy as np
 import os
 import math
 import random
+
+# declare variables
+ORIGINAL_PATH = os.getcwd()
+
+TRAIN_BATCH_SIZE = 5225
+TEST_BATCH_SIZE = 1653
+EPOCH_SIZE = 1
+
+IMAGE_X_DIM = 50
+IMAGE_Y_DIM = 50
+IMAGE_X_DIM = 50
+IMAGE_Y_DIM = 50
+
+ # declare where to save our model and weights
 
 ###############################################################################
 # FUNCTION NAME: trainAndValidateCNN
@@ -27,23 +42,6 @@ import random
 # RETURN: none
 ###############################################################################
 def trainAndValidateCNN():
-    # declare variables
-    ORIGINAL_PATH = os.getcwd()
-
-    TRAIN_BATCH_SIZE = 5225
-    TEST_BATCH_SIZE = 1653
-    EPOCH_SIZE = 1
-
-    IMAGE_X_DIM = 50
-    IMAGE_Y_DIM = 50
-    IMAGE_X_DIM = 50
-    IMAGE_Y_DIM = 50
-
-    TRAINING_SET_FRAMES_PATH = './dataset/training_set_frames/'
-    VALIDATION_SET_FRAMES_PATH = './dataset/validation_set_frames/'
-
-    TARGET_DIR = './models/' # declare where to save our model and weights
-
     classifier = Sequential()
 
 
@@ -86,8 +84,8 @@ def trainAndValidateCNN():
     test_datagen = ImageDataGenerator(rescale = None)#1./255)
 
     # declare our paths
-    training_path = ORIGINAL_PATH + TRAINING_SET_FRAMES_PATH
-    validation_path = ORIGINAL_PATH + VALIDATION_SET_FRAMES_PATH
+    training_path = ORIGINAL_PATH + variables.OUTPUT_TRAINING_PATH
+    validation_path = ORIGINAL_PATH + variables.OUTPUT_VALIDATION_PATH
 
     # get training set
     training_set = train_datagen.flow_from_directory(training_path,
@@ -112,7 +110,7 @@ def trainAndValidateCNN():
                                 validation_data = test_set,
                                 validation_steps = TEST_BATCH_SIZE) 
 
-    classifier.save(TARGET_DIR + 'model.h5')
-    classifier.save_weights(TARGET_DIR + 'weights.h5')
+    classifier.save(variables.TARGET_DIR + 'model.h5')
+    classifier.save_weights(variables.TARGET_DIR + 'weights.h5')
 
 # trainAndValidateCNN()

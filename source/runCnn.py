@@ -6,7 +6,7 @@
 #               - file will also be able to organize videos and split them into
 #                   frames if need be
 #
-# VERSION: 4.2.3v
+# VERSION: 1.0.2v
 ###############################################################################
 from organizingTrainAndValidation import organizeVideos
 from splitVideosIntoFrames import splitVideos

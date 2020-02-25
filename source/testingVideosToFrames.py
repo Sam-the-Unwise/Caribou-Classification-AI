@@ -1,102 +1,162 @@
-"""
-Created on Wed Jan 29 14:37:03 2020
-@author: Keenan
-"""
+###############################################################################
+# AUTHOR: Keenan Swanson
+#
+# DESCRIPTION: file that will split videos into frames, save them in an array
+#           for easy access, and delete the array when necessary
+#
+# VERSION: 1.0.0
+###############################################################################
 import cv2,os
-count = 0
-sec = 0
+COUNT = 0
+SEC = 0
 vidLen = 0
-expectedFrames = 18;
+EXPECTED_FRAMES = 18
+FRAME_ARRAY = []
 originalDir = os.getcwd()
 
+
+###############################################################################
+# FUNCTION NAME: changeDir
+# WHAT IT DOES:  
+# RETURN:  
+###############################################################################
 def changeDir( directory ):
     os.chdir( directory )
 
+
+###############################################################################
+# FUNCTION NAME: getVidName
+# WHAT IT DOES:  
+# RETURN:  
+###############################################################################
 def getVidName( videoFile ):
     string = videoFile
     strArr = string.split('.')
     string = strArr[0]
     return string
 
+
+###############################################################################
+# FUNCTION NAME: getVidDuration
+# WHAT IT DOES:  
+# RETURN:  
+###############################################################################
 def getVidDuration( videoFile ):
     video = cv2.VideoCapture( videoFile )
     fps = video.get(cv2.CAP_PROP_FPS)
-    framesCount = video.get(cv2.CAP_PROP_FRAME_COUNT)
+    framesCOUNT = video.get(cv2.CAP_PROP_FRAME_COUNT)
     length = 0
     if(fps == 0):
         length = 0
     else:
-        length = int(framesCount/fps)
+        length = int(framesCOUNT/fps)
     return length
 
 #vidLen = getVidDuration( '1179_20180822_155018.mp4' )
 
+
+###############################################################################
+# FUNCTION NAME: getFrame
+# WHAT IT DOES:  
+# RETURN:  
+###############################################################################
 def getFrame(videoFile, seconds, fr, counts):
-     count = 0#, vidLen
-     sec = 0
-     count += counts
-     sec += seconds
+     COUNT = 0#, vidLen
+     SEC = 0
+     COUNT += counts
+     SEC += seconds
      vid = cv2.VideoCapture( videoFile )
      vidName = getVidName( videoFile )
     
-     if sec > getVidDuration(videoFile):
+     if SEC > getVidDuration(videoFile):
          return print("The video has been divided into frames")
     
      if fr == 0:
-         fr = getVidDuration(videoFile)/30#vid.get(cv2.CAP_PROP_FPS)
+         fr = getVidDuration(videoFile)/30
          fr = round(fr,2)
          print("The frame rate is %d\n", fr)
     
-     vid.set(cv2.CAP_PROP_POS_MSEC,sec*1000)
+     vid.set(cv2.CAP_PROP_POS_MSEC, SEC*1000)
      success,image = vid.read()
     
      if success:
-         cv2.imwrite(vidName + "_frame_"+str(count)+".jpg", image) # save frame as JPG file
-         frameArr.append(vidName+ "_frame_"+str(count)+".jpg")
-         print(sec)
-         sec += fr
-         sec = round(sec,2)
-         count += 1
-     return getFrame( videoFile, sec, fr, count)
+         cv2.imwrite(vidName  +  "_frame_" + str(COUNT) + ".jpg", image) # save frame as JPG file
+         FRAME_ARRAY.append(vidName +  "_frame_" + str(COUNT) + ".jpg")
+         print(SEC)
+
+         SEC += fr
+         SEC = round(SEC,2)
+
+         COUNT += 1
+         
+     return getFrame( videoFile, SEC, fr, COUNT)
 
 
-frameArr = []
+###############################################################################
+# FUNCTION NAME: getFrameArray
+# WHAT IT DOES:  
+# RETURN:  
+###############################################################################
 def getFrameArray():
-    return frameArr
+    return FRAME_ARRAY
 
+
+###############################################################################
+# FUNCTION NAME: dumpArr 
+# WHAT IT DOES:  
+# RETURN:  
+###############################################################################
 def dumpArr():
-    global frameArr
-    while len(frameArr) > 0:
-        frameArr.pop()
-        
+
+    while len(FRAME_ARRAY) > 0:
+        FRAME_ARRAY.pop()
+
+
+###############################################################################
+# FUNCTION NAME: deleteFiles
+# WHAT IT DOES:  
+# RETURN:  
+###############################################################################
 def deleteFiles( directory ):
     os.chdir( directory )
-    #global frameArr
+
     arrayOfImages = os.listdir( directory )
+
     for file in range(len(arrayOfImages)):
         fileName = arrayOfImages[file]
         os.remove(fileName)
+
     os.chdir(originalDir)
     dumpArr()
     
     
+###############################################################################
+# FUNCTION NAME: getAllImagesNotDeleted
+# WHAT IT DOES:  
+# RETURN:  
+###############################################################################
 def getAllImagesNotDeleted( array, directory ):
     files = os.listdir( directory )
-    #for videos in range(len(array)):
-        #files.pop( files.index(array[ videos ] ))
-    #os.chdir( directory )
+
     print(files)
     for file in range(len(files)):
         fileName = files[file]
         os.remove(fileName)
     os.chdir(originalDir)
 
-def getFrameRate( videoFile, expectedFrames):
-    if(expectedFrames > 0):
-        return getVidDuration(videoFile)/expectedFrames
+
+###############################################################################
+# FUNCTION NAME:  getFrameRate
+# WHAT IT DOES:  
+# RETURN:  
+###############################################################################
+def getFrameRate( videoFile, EXPECTED_FRAMES):
+    if(EXPECTED_FRAMES > 0):
+        return getVidDuration(videoFile)/EXPECTED_FRAMES
     else:
         return getVidDuration(videoFile)/9 #WE WILL MAKE 9 DEFAULT
-#frameRate = vidLen/expectedFrames
 
-#getFrame( '1179_20180822_155018.mp4' , sec, getFrameRate("1179_20180822_155018.mp4",18))
-#print(frameArr)
+#frameRate = vidLen/EXPECTED_FRAMES
+
+#getFrame( '1179_20180822_155018.mp4' , SEC, getFrameRate("1179_20180822_155018.mp4",18))
+#print(FRAME_ARRAY)

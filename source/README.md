@@ -2,6 +2,7 @@
 
 <i> please note our main file is called <b>runCNN.py</b> </i>
 
+
 ### deleteVideoFrames.py
 
 A script that will go through the folders our video frames have been saved in and delete them once training the model has been finished

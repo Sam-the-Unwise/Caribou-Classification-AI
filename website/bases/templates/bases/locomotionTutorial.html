@@ -1,0 +1,16 @@
+{% extends 'bases/training.html' %}
+{% load static %}
+
+{% block content %}
+	<h2>State of Locomotion</h2>
+	<h3><b>Wading/Swimming</b></h3>
+	<h3><b>Running</b></h3>
+	<h3><b>Walking</b> </h3>
+	<h3><b>Stationary Awake</b> - standing or laying down awake.</h3>
+    <h3><b>Napping</b> - head on the ground, minimal movement (breathing, twitching), may see curled up legs/hooves or sideways camera angle.</h3>
+    <br>
+{% endblock%}
+
+{% block bottomButton %}
+	<button class="buttonRight" onclick= "window.location.href ='{% url 'training-calf-visible' %}'">Next</button>
+{% endblock %}

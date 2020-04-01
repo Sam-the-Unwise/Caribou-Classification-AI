@@ -1,0 +1,17 @@
+{% extends 'bases/training.html' %}
+{% load static %}
+
+{% block content %}
+	<h2>Ruminating/Foraging</h2>
+    <h3><b>RUMINATING</b> – Chewing its cud; can often (but not always) see “swollen” cheeks or bolus going up the esophagus. If the caribou is chewing while resting or bedded, it is most likely ruminating. They can also ruminate while walking if they get disturbed.</h3>
+	<h3><b>CHEWING</b> – Chewing food but only took a bite before the start of the video (e.g., chewing while searching for food).</h3>
+	<h3><b>EATING</b> – "Took a bite" of a food item. Can't always see what the food item is (when the caribou eats, the fur from its neck sometimes obstructs the camera).</h3>
+	<h3><b>DRINKING</b></h3>
+    <h3><b>LICKING</b> – Licked the soil/rock for minerals but did not take a bite of a food item.</h3>
+    <h3><b>None of the above</b></h3>
+    <br>
+{% endblock%}
+
+{% block bottomButton %}
+	<button class="buttonRight" onclick= "window.location.href ='{% url 'training-locomotion' %}'">Next</button>
+{% endblock %}

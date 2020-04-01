@@ -1,0 +1,18 @@
+{% extends 'bases/training.html' %}
+{% load static %}
+
+{% block content %}
+	<h2>What is the PREDOMINANT vegetation?</h2>
+	<h3><b>Poor Visibility</b> - this video clip offers poor visibility of the predominant vegetation (ground and surroundings) near the caribou.</h3>
+	<h3><b>Alpine Tundra</b> - high elevation/latitude prevents tree growth; vegetation grows close to the ground and consists mainly of grasses, sedges, forbs, and may include lichen, dwarf woody or semi-woody shrubs, or mosses.</h3>
+	<h3><b>Lichen, Moss, or Herbaceous (grass, forbs/flowering plants)</b></h3>
+	<h3><b>Shrubby</b> - small- to medium-sized woody plant, excluding coniferous saplings.</h3>
+    <h3><b>Forested(Deciduous)</b></h3>
+    <h3><b>Forested(Coniferous)</b></h3>
+    <h3><b>Unvegetated Areas</b> - rocks, water</h3>
+    <br>
+{% endblock%}
+
+{% block bottomButton %}
+	<button class="buttonRight" onclick= "window.location.href ='{% url 'training-habitat-features-visible' %}'">Next</button>
+{% endblock %}

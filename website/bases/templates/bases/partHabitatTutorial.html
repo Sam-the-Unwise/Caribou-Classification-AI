@@ -1,0 +1,38 @@
+{% extends 'bases/training.html' %}
+{% load static %}
+
+{% block content %}
+	<h2>What part of the habitat is visible?</h2>
+	<h3><b>Ground and surrounding vegetation</b></h3>
+	<h3><b>Only ground</b></h3>
+	<h3><b>None</b></h3>
+    <br>
+
+
+	<h3><b>For Example:</b></h3>
+	<div class="second">
+		<img src="{% static 'img/excellent.png' %}" height="250" width="350">
+		<br>
+		<b>Ground and surrounding vegetation</b>
+		<br>
+		<br>
+	</div>
+
+
+	<img src="{% static 'img/ground.png' %}" height="250" width="350">
+	<br>
+	<b>Only ground</b>
+	<br>
+	<br>
+
+
+	<img src="{% static 'img/extremely.png' %}" height="250" width="350">
+    <br>
+    <b>None</b>
+    <br>
+    <br>
+{% endblock%}
+
+{% block bottomButton %}
+	<button class="buttonRight" onclick= "window.location.href ='{% url 'training-vegetation' %}'">Next</button>
+{% endblock %}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>{% extends 'bases/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
+
+  <title>Video Analysis </title>
+
+  <link rel="stylesheet" href="{% static 'bases/normalize.css' %}">
+  <link rel="stylesheet" href="{% static 'bases/layout.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'analysis/hb.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="tbody-bkg">
+      <div id="classification-content">
+        <h1>Caribou Video Analysis</h1>
+      <video  width="700"  src="{% static 'videos/1179_20180824_151017.mp4' %}" controls></video>
+      </div>
+
+      <div class="form_content">
+          <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc9WotVbPRv-QOPGs3ewPPDeEPV304K-c6iKBxe74_jYjmHPg/viewform?embedded=true"
+                  width="800" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+      </div>
+    <footer>copyright @Caribou Cams</footer>
+
+
+
+
+  </div>
+
+{% endblock %}
+
+</html>

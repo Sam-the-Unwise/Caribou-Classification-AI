@@ -1,0 +1,117 @@
+{% extends 'bases/base.html' %}
+{% load static %}
+
+{% block head %}
+
+  <title>Video Analysis </title>
+
+  <link rel="stylesheet" href="{% static 'bases/normalize.css' %}">
+  <link rel="stylesheet" href="{% static 'bases/layout.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'analysis/hb.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+  <div class="tbody-bkg">
+    <div id="classification-content">
+      <h1>Caribou Video Analysis</h1>
+      <video  width="700"  src="{% static 'videos/1179_20180824_151017.mp4' %}" controls></video>
+    </div>
+	
+    <div id="form_content">
+    <form action=""> 
+      {% csrf_token %}
+		<div id="videoInfo">
+			<label>Video id:</label>
+			<span>1179_20180824_151017.mp4</span>
+			<label>Observer:</label>
+			<span>Dongyang Yu</span>
+		</div>
+		
+        <div class="option_layout">
+        <label>Video Quality</label><br>
+        <select name="videoQuality"> //'name' is used to reference the form-data after submission
+          <option value="excellent">Excellent</option>
+          <option value="fair to good">Fair to good</option>
+          <option value="poor">Poor</option>
+          <option value="extremely Obstructed">Extremely Obstructed</option>
+        </select>
+        </div>
+
+        <div class="option_layout">
+        <label>Ruminating/Foraging</label><br>
+        <select name="ruminatingOrForaging">
+          <option value="ruminating">RUMINATING</option>
+          <option value="chewing">CHEWING</option>
+          <option value="eating">EATING</option>
+          <option value="drinking">DRINKING</option>
+          <option value="licking">LICKING soil for minerals but did not eat</option>
+          <option value="none">None of the above</option>
+        </select>
+        </div>
+
+
+        <div class="option_layout">
+        <label>Behavior</label><br>
+        <select name="behavior">
+          <option value="wadingOrSwimming">Wading/Swimming</option>
+          <option value="running">Running</option>
+          <option value="walking">Walking</option>
+          <option value="stationaryAwake">Stationary Awake</option>
+          <option value="napping">Napping</option>
+        </select>
+        </div>
+        
+        <div class="option_layout">
+        <label>What part of the habitat is visible</label><br>
+        <select name="habitat">
+          <option value="groundAndImmediateSurroundings">Ground and immediate surroundings</option>
+          <option value="onlyGround">Only ground</option>
+          <option value="none">None</option>
+        </select>
+        </div>
+
+        <div class="option_layout">
+        <label>Potential insect avoidance behavior</label><br>
+        <select name="insectAvoidanceBehavior">
+          <option value="shook">Shook its head</option>
+          <option value="keepStill">Kept its nose still AND on the ground</option>
+          <option value="scratched">Scratched</option>
+          <option value="soughtSnowPatch">Sought snow patch</option>
+          <option value="hunddled">Huddled</option>
+          <option value="none">None of the above</option>
+        </select>
+        </div>
+
+        <div id="confirmationField">
+          <input type="button" value="Back" onclick="jump()">
+          <input type="reset" value="Reset">
+          <input type="button" value="Submit" onclick="popUp()">
+
+          <script type="text/javascript" >
+            function popUp()
+            {
+                alert("Thank you for your feedback! The score of your analysis is 100.");
+              window.location.href="{% url 'accounts-register' %}";
+            }
+
+            function jump()
+            {
+              window.location.href="{% url 'bases-home' %}";
+            }
+          </script>
+        </div>
+
+      </form>
+
+    </div>
+
+    <footer>copyright @Caribou Cams</footer>
+
+
+
+
+  </div>
+
+{% endblock %}

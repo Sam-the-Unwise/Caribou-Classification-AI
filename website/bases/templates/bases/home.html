@@ -1,0 +1,33 @@
+{% extends 'bases/base.html' %}
+{% load static %}
+
+{% block head %}
+	<title>Welcome to Caribou!</title>
+{% endblock %}
+
+
+{% block content %}
+	<div class="tbody">
+	  <img src="{% static 'img/Full_Caribou.png' %}" height="320px" width="230px">
+	<h1>Caribou Cams</h1>
+
+	{% if messages %}
+	    {% for message in messages %}
+	      <div class="alert alert-{{ message.tags }}">
+	        {{ message }}
+	      </div>
+	    {% endfor %}
+	{% endif %}
+
+	{% if user.is_authenticated %}
+		<button class="fontBtn" onclick= "window.location.href ='{% url 'bases-training'%}'" >Training</button>
+		<button class="fontBtn" onclick="window.location.href ='{% url 'analysis-category' %}'">Category</button>
+  	{% else %}
+		<button class="fontBtn" onclick= "window.location.href ='{% url 'bases-training'%}'" >Training</button>
+		<button class="fontBtn" onclick="window.location.href ='{% url 'accounts-login' %}'">Login</button>
+	{% endif %}
+
+
+	</div>
+
+{% endblock %}

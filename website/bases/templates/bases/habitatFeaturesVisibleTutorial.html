@@ -1,0 +1,17 @@
+{% extends 'bases/training.html' %}
+{% load static %}
+
+{% block content %}
+	<h2>Habitat features visible</h2>
+	<h3><b>Snow cover 1–50%</b> - in the vicinity, ignore mountain tops and faraway snow.</h3>
+	<h3><b>Snow cover 50–100%</b> - in the vicinity, ignore mountain tops and faraway snow.</h3>
+	<h3><b>Water</b> - e.g., river, puddle, etc.</h3>
+	<h3><b>Burn area visible</b> - at any successional stage; e.g., burn scars, sooty snags/logs</h3>
+    <h3><b>Human signs</b> - any sign of human presence(e.g., human activity, buildings, roads, other structures, etc.)</h3>
+    <h3><b>None of the above</b></h3>
+    <br>
+{% endblock%}
+
+{% block bottomButton %}
+	<button class="buttonRight" onclick= "window.location.href ='{% url 'training-other-species' %}'">Next</button>
+{% endblock %}

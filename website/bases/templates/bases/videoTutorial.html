@@ -1,0 +1,50 @@
+{% extends 'bases/training.html' %}
+{% load static %}
+
+{% block content %}
+
+	<h2>How to distinguish the quality of the video?</h2>
+	<h3><b>EXCELLENT</b> – excellent image</h3>
+	<h3><b>FAIR to GOOD</b> – most clips fall into this category; allows easy observation, partial to no camera lens obstruction</h3>
+	<h3><b>POOR</b> – some data can be collected but the images is problematic</h3>
+	<h3><b>EXTERMELY OBSTRUCTTED</b> – the image is obstructed the entire time (often by the chin or fur while eating) and none of the vegetation present can seen </h3>
+    <br>
+	<h3><b>For Example:</b></h3>
+
+
+	<div class="second">
+		<img src="{% static 'img/excellent.png' %}" height="250" width="350">
+		<br>
+		<b>EXCELLENT</b>
+		<br>
+		<br>
+	</div>
+
+
+	<img src="{% static 'img/fair.png' %}" height="250" width="350">
+	<br>
+	<b>FAIR to GOOD</b>
+	<br>
+	<br>
+
+
+	<div class="second">
+		<img src="{% static 'img/poor.png' %}" height="250" width="350">
+		<br>
+		<b>POOR</b>
+		<br>
+		<br>
+	</div>
+
+	<img src="{% static 'img/extremely.png' %}" height="250" width="350">
+	<br>
+	<b>EXTREMELY OBSTRUCTED</b>
+	<br>
+	<br>
+
+
+{% endblock %}
+
+{% block bottomButton %}
+	<button class="buttonRight" onclick= "window.location.href ='{% url 'training-ruminating' %}'">Next</button>
+{% endblock %}

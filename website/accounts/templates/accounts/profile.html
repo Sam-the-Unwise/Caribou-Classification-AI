@@ -1,0 +1,40 @@
+{% extends "bases/base.html" %}
+{% load static %}
+
+{% block head %}
+	<title>My Login Page</title>
+
+	<link rel="stylesheet" type="text/css" href="{% static 'accounts/my-login.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<body class="my-login-page">
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-md-center h-100">
+				<div class="card-wrapper-profile">
+					<div class="brand">
+						<img src="{% static 'img/logo.png' alt-'logo%}">
+					</div>
+					<div class="card fat">
+                        <div class="card-body">
+
+                        <h1>Welcome {{ user.first_name }} {{ user.last_name }}(<u>{{ user.username }}</u>)!</h1>
+
+    <p>Email: {{user.email}}</p>
+    <a href="{% url 'password_change'%}" >
+    Change Password
+    </a>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+{% endblock content %}

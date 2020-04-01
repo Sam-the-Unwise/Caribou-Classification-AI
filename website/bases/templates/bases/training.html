@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Tutorial</title>
+	<link href="{% static 'bases/training.css' %}" rel="stylesheet" type="text/css"/>
+
+</head>
+<body >
+
+<div class="mainBox">
+        <div class="leftBox">
+        	<div class="menuItem zzjg">
+                <h2>Navigation Bar</h2>
+            </div>
+            <div class="menuItem zzjg">
+                <a href="{% url 'training-video-quality' %}"><h3>Video Quality</h3></a>
+            </div>
+            <div class="menuItem ygfc">
+                <a href="{% url 'training-ruminating' %}"><h3>Ruminating/Foraging</h3></a>
+            </div>
+            <div class="menuItem wghf">
+                <a href="{% url 'training-locomotion' %}"><h3>State of Locomotion</h3></a>
+            </div>
+            <div class="menuItem xxyd">
+                <a href="{% url 'training-calf-visible'%}"><h3>Is a calf visible?</h3></a>
+            </div>
+            <div class="menuItem tzgg">
+                <a href="{% url 'training-other-caribou-visible'%}"><h3>Other caribou visible (excluding own calf)?</h3></a>
+            </div>
+            <div class="menuItem xwzx">
+                <a href="{% url 'training-part-habitat' %}">
+                    <h3>What part of the habitat is visible?</h3></a>
+            </div>
+            <div class="menuItem xwzx">
+                <a href="{% url 'training-vegetation' %}">
+                    <h3>What is the PREDOMINANT vegetation?</h3></a>
+            </div>
+            <div class="menuItem xwzx">
+                <a href="{% url 'training-habitat-features-visible'%}">
+                    <h3>Habitat features visible</h3></a>
+            </div>
+            <div class="menuItem xwzx">
+                <a href="{% url 'training-other-species'%}">
+                    <h3>Other species detected?</h3></a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $('.slideBtn').click(
+            function() {
+                $('.leftBox').toggle();
+                var status = $('.leftBox').css("display");
+                if (status == 'none') {
+                    $('.rightBox').css("marginLeft", "0");
+                    $(this).css("background",
+                            "red");
+                } else {
+                    $('.rightBox').css("marginLeft", "241px");
+                    $(this).css("background",
+                            "green");
+                }
+            });
+    </script>
+
+    <div class="tutorial">
+	<h1>Tutorial</h1>
+    </div>
+
+<div class="tbody">
+	<br>
+    {% block content %}
+
+    {% endblock %}
+    <div class="box">
+	<button class="buttonLeft" onclick= "window.location.href ='{% url 'bases-home' %}'">Back to home page</button>
+        {% block bottomButton %}
+<!--	<button class="buttonRight" onclick= "window.location.href ='{% url 'bases-training-test' %}'">Go to analysis test</button>-->
+	    {% endblock %}
+    </div>
+
+</div>
+
+</body>
+</html>

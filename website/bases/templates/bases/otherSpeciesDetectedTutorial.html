@@ -1,0 +1,12 @@
+{% extends 'bases/training.html' %}
+{% load static %}
+
+{% block content %}
+	<h2>Other species detected?</h2>
+	<h3>Enter the type of animal detected (e.g., canine, bird of prey) or finer taxonomic level if known (e.g., wolf, golden eagle).</h3>
+    <br>
+{% endblock%}
+
+{% block bottomButton %}
+	<button class="buttonRight" onclick= "window.location.href ='{% url 'bases-training-test' %}'">Go to analysis test</button>
+{% endblock %}

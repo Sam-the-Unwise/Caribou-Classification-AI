@@ -1,0 +1,15 @@
+{% extends 'bases/training.html' %}
+{% load static %}
+
+{% block content %}
+	<h2>Is a calf visible?</h2>
+	<h3><b>Yes</b> – her own: maternal behavior (licking/grooming, being very close to a young calf, suckling) or calving evidence (placenta/sac, wet neonate).</h3>
+	<h3><b>Yes</b> – possibly her own: no maternal behavior detected, but the calf is not with another cow.</h3>
+	<h3><b>Yes</b> – calf is with another cow</h3>
+	<h3><b>No</b></h3>
+    <br>
+{% endblock%}
+
+{% block bottomButton %}
+	<button class="buttonRight" onclick= "window.location.href ='{% url 'training-other-caribou-visible' %}'">Next</button>
+{% endblock %}

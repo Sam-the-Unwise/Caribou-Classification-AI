@@ -1,0 +1,14 @@
+{% extends 'bases/training.html' %}
+{% load static %}
+
+{% block content %}
+	<h2>Other caribou visible (excluding own calf)?</h2>
+	<h3><b>Yes</b> – herd.</h3>
+	<h3><b>Yes</b> – one to a few individuals.</h3>
+	<h3><b>No</b></h3>
+    <br>
+{% endblock%}
+
+{% block bottomButton %}
+	<button class="buttonRight" onclick= "window.location.href ='{% url 'training-part-habitat' %}'">Next</button>
+{% endblock %}

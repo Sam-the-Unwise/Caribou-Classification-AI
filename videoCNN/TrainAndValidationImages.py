@@ -20,7 +20,7 @@ from os import path
 TRAINING_SET = "/dataset/training_set/"
 
 def toImageTrainingFolder( string ):
-    print("\n\n Moving" + string +" training files to training images pic directory\n\n")
+    print("\n\n Moving " + string +" training files to training images pic directory\n\n")
     
     #Creates an array of the files in the directory prior to any changes
     videoArr = os.listdir(originalPath+TRAINING_SET+string)
@@ -60,12 +60,12 @@ def toImageTrainingFolder( string ):
             frameRate = VideoToFrames.getFrameRate(originalPath+currentDir+videoFile, 18)
             
             #breaks the video into frames
-            VideoToFrames.getFrame(originalPath+currentDir+videoFile, 0, frameRate, 1)
+            VideoToFrames.getFrame(originalPath+currentDir+videoFile, frameRate, frameRate, 1)
             
             #gets the newly created image files
             imageArr = VideoToFrames.getFrameArray()
             
-            print(imageArr)
+            #print(imageArr)
             
             #change working directory back to main directory
             VideoToFrames.changeDir(originalPath)
@@ -137,7 +137,7 @@ def toImageValidationFolder( folderName ):
             frameRate = VideoToFrames.getFrameRate(originalPath+currentDir+videoFile, 18)
             
             
-            VideoToFrames.getFrame(originalPath+currentDir+videoFile, 0, frameRate, 1)
+            VideoToFrames.getFrame(originalPath+currentDir+videoFile, frameRate, frameRate, 1)
             
             
             imageArr = VideoToFrames.getFrameArray()

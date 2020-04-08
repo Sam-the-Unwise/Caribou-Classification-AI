@@ -3,6 +3,7 @@ from keras.models import Sequential, Model
 from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Input
 from keras.layers.core import Flatten, Dropout, Lambda
 from keras.preprocessing.image import ImageDataGenerator
+from keras.layers.normalization import BatchNormalization
 from keras.optimizers import Adam
 import tensorflow as tf
 
@@ -13,12 +14,12 @@ import random
 
 originalPath = os.getcwd()
 
-TRAIN_BATCH_SIZE = 5225
-TEST_BATCH_SIZE = 1653
+TRAIN_BATCH_SIZE = 3240
+TEST_BATCH_SIZE = 648
 EPOCH_SIZE = 1
 
-IMAGE_DIMENSION_X = 50
-IMAGE_DIMENSION_Y = 50
+IMAGE_DIMENSION_X = 256
+IMAGE_DIMENSION_Y = 256
 
 
 # #amount of files in training set
@@ -34,8 +35,50 @@ classifier = Sequential()
 
 # # Step 1 - Convolution
 #classifier.add(Conv2D(36, (3, 3), input_shape = (IMAGE_DIMENSION_X, IMAGE_DIMENSION_Y, 3), activation = 'relu'))
-classifier.add(Conv2D(3, (1, 1), input_shape = (IMAGE_DIMENSION_X, IMAGE_DIMENSION_Y, 3), activation = 'relu'))
+#classifier.add(Conv2D(3, (1, 1), input_shape = (IMAGE_DIMENSION_X, IMAGE_DIMENSION_Y, 3), activation = 'relu'))
+classifier.add(Conv2D(16, (3, 3), input_shape = (IMAGE_DIMENSION_X, IMAGE_DIMENSION_Y, 3), activation = 'relu'))
+classifier.add(Conv2D(16, (3, 3), activation='relu'))
+classifier.add(BatchNormalization())
 
+classifier.add(Conv2D(32, (3, 3), activation='relu'))
+classifier.add(Conv2D(32, (3, 3), activation='relu'))
+classifier.add(BatchNormalization())
+
+
+classifier.add(Conv2D(64, (3, 3), activation='relu'))
+classifier.add(Conv2D(64, (3, 3), activation='relu'))
+classifier.add(BatchNormalization())
+classifier.add(MaxPooling2D(pool_size=(2,2)))
+
+classifier.add(Conv2D(128, (3, 3), activation='relu'))
+classifier.add(Conv2D(128, (2, 2), activation='relu'))
+classifier.add(BatchNormalization())
+
+
+classifier.add(Conv2D(64, (3, 3), activation='relu'))
+classifier.add(Conv2D(64, (3, 3), activation='relu'))
+classifier.add(BatchNormalization())
+
+
+classifier.add(Conv2D(64, (3, 3), activation='relu'))
+classifier.add(Conv2D(64, (3, 3), activation='relu'))
+classifier.add(BatchNormalization())
+classifier.add(MaxPooling2D(pool_size=(2,2)))
+
+
+classifier.add(Conv2D(64, (3, 3), activation='relu'))
+classifier.add(Conv2D(64, (3, 3), activation='relu'))
+classifier.add(BatchNormalization())
+
+
+classifier.add(Conv2D(128, (3, 3), activation='relu'))
+classifier.add(Conv2D(128, (2, 2), activation='relu'))
+classifier.add(BatchNormalization())
+
+
+
+
+#classifier.add(MaxPooling2D(pool_size=(2,2)))
 # # Step 2 - Pooling
 # classifier.add(MaxPooling2D(pool_size = (4, 4)))
 
@@ -53,13 +96,13 @@ classifier.add(Conv2D(3, (1, 1), input_shape = (IMAGE_DIMENSION_X, IMAGE_DIMENSI
 
 
 #classifier.add(Conv2D(3, (1, 1), activation='relu'))
-classifier.add(Conv2D(12, (5, 5), activation='relu'))
-classifier.add(MaxPooling2D(pool_size = (2, 2)))
-classifier.add(Conv2D(16, (3, 3), activation='relu'))
-classifier.add(MaxPooling2D(pool_size = (2, 2)))
-classifier.add(Conv2D(24, (3, 3), activation='relu'))
-classifier.add(MaxPooling2D(pool_size = (2, 2)))
-classifier.add(Conv2D(48, (3, 3), activation='relu'))
+
+#classifier.add(MaxPooling2D(pool_size = (2, 2)))
+#classifier.add(Conv2D(64, (3, 3), activation='relu'))
+#classifier.add(MaxPooling2D(pool_size = (2, 2)))
+#classifier.add(Conv2D(64, (3, 3), activation='relu'))
+#classifier.add(MaxPooling2D(pool_size = (2, 2)))
+#classifier.add(Conv2D(48, (3, 3), activation='relu'))
 #classifier.add(MaxPooling2D(pool_size = (2, 2)))
 #classifier.add(Conv2D(64, (3, 3), activation='relu'))
 
@@ -67,8 +110,15 @@ classifier.add(Conv2D(48, (3, 3), activation='relu'))
 classifier.add(Flatten())
 
 # Step 4 - Full connection
-classifier.add(Dense(units = 128, activation = 'relu'))
+#classifier.add(Dense(units = 128, activation = 'relu'))
+classifier.add(Dense(32, activation="relu"))
+classifier.add(Dropout(0.3))
+
+classifier.add(Dense(32, activation="relu"))
+classifier.add(Dropout(0.2))
+#classifier.add(Dense(4, activation = 'softmax'))
 classifier.add(Dense(5, activation = 'softmax'))
+
 
 
 # classifier.add(Lambda(lambda x: x / 255.0 - 0.5, input_shape = INPUT_SHAPE))
@@ -95,13 +145,13 @@ test_datagen = ImageDataGenerator(rescale = None)#1./255)
 
 training_set = train_datagen.flow_from_directory(originalPath+'/dataset/training_set_frames/',
                                                    target_size = (IMAGE_DIMENSION_X, IMAGE_DIMENSION_Y),
-                                                   batch_size = 64,
+                                                   batch_size = 32,
                                                    class_mode = 'categorical')
 
 
 test_set = test_datagen.flow_from_directory(originalPath+'/dataset/validation_set_frames/',
                                            target_size = (IMAGE_DIMENSION_X, IMAGE_DIMENSION_Y),
-                                           batch_size = 64,
+                                           batch_size = 32,
                                            class_mode = 'categorical')
 
 

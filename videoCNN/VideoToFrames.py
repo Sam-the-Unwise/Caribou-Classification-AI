@@ -42,10 +42,10 @@ def getFrame(videoFile, seconds, fr, counts):
      vidName = getVidName( videoFile )
     
      if sec > getVidDuration(videoFile):
-         return print("The video has been divided into frames")
+         return print("The video has been divided into frames\n\n")
     
      if fr == 0:
-         fr = getVidDuration(videoFile)/30#vid.get(cv2.CAP_PROP_FPS)
+         fr = getVidDuration(videoFile)/vid.get(cv2.CAP_PROP_FPS)#30
          fr = round(fr,2)
          print("The frame rate is %d\n", fr)
     
@@ -55,7 +55,7 @@ def getFrame(videoFile, seconds, fr, counts):
      if success:
          cv2.imwrite(vidName + "_frame_"+str(count)+".jpg", image) # save frame as JPG file
          frameArr.append(vidName+ "_frame_"+str(count)+".jpg")
-         print(sec)
+         #print(sec)
          sec += fr
          sec = round(sec,2)
          count += 1

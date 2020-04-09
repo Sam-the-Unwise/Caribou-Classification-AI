@@ -35,7 +35,7 @@ def toImageTrainingFolder( string ):
     currentDir = "/dataset/training_set/" + string + "/"
     
     #the directory we will be sending files
-    destinationDir = "/dataset/training_set_frames/"+string+"/"
+    destinationDir = "/dataset/training_set_frames/"+ string +"/"
     
     #this is a check if there are any files to break into images
     if (arrayLen > 0):
@@ -54,13 +54,13 @@ def toImageTrainingFolder( string ):
             print("\t"+videoFile+"\n")
             
             #change the working directory to where the videos are located
-            VideoToFrames.changeDir(originalPath+currentDir)
+            VideoToFrames.changeDir(originalPath + currentDir)
             
             #gets the framerate needed to get x frames
-            frameRate = VideoToFrames.getFrameRate(originalPath+currentDir+videoFile, 18)
+            frameRate = VideoToFrames.getFrameRate(originalPath + currentDir + videoFile, 18)
             
             #breaks the video into frames
-            VideoToFrames.getFrame(originalPath+currentDir+videoFile, frameRate, frameRate, 1)
+            VideoToFrames.getFrame(originalPath + currentDir + videoFile, frameRate, frameRate, 1)
             
             #gets the newly created image files
             imageArr = VideoToFrames.getFrameArray()
@@ -83,8 +83,8 @@ def toImageTrainingFolder( string ):
                 imageOnlyArr = imageArr[frame].split('/')[-1]
                 
                 #moves the file over to the destination directory
-                os.replace(str(originalPath)+str(currentDir)+str(imageOnlyArr),
-                           str(originalPath)+str(destinationDir)+str(imageOnlyArr))
+                os.replace(str(originalPath) + str(currentDir) +str(imageOnlyArr),
+                           str(originalPath) + str(destinationDir) + str(imageOnlyArr))
                 
                 #move back to the main directory
                 os.chdir(originalPath)
@@ -97,10 +97,10 @@ def toImageTrainingFolder( string ):
 
 
 def toImageValidationFolder( folderName ):
-    print("\n\n Moving "+folderName+" test files to test images pic directory\n\n")
+    print("\n\n Moving " + folderName + " test files to test images pic directory\n\n")
     
     #Creates an array of the files in the directory prior to any changes    
-    videoArr = os.listdir(originalPath+"/dataset/validation_set/"+folderName)
+    videoArr = os.listdir(originalPath + "/dataset/validation_set/" + folderName)
     
     #Gets the amount of files in the directory    
     arrayLen = len( videoArr )
@@ -109,10 +109,10 @@ def toImageValidationFolder( folderName ):
     VideoToFrames.changeDir(originalPath)
     
     
-    currentDir = "/dataset/validation_set/"+folderName+"/"
+    currentDir = "/dataset/validation_set/" + folderName + "/"
     
     
-    destinationDir = "/dataset/validation_set_frames/"+folderName+"/"
+    destinationDir = "/dataset/validation_set_frames/" + folderName + "/"
     
     
     if (arrayLen > 0):    
@@ -134,10 +134,10 @@ def toImageValidationFolder( folderName ):
             VideoToFrames.changeDir(originalPath+currentDir)
             
             
-            frameRate = VideoToFrames.getFrameRate(originalPath+currentDir+videoFile, 18)
+            frameRate = VideoToFrames.getFrameRate(originalPath + currentDir + videoFile, 18)
             
             
-            VideoToFrames.getFrame(originalPath+currentDir+videoFile, frameRate, frameRate, 1)
+            VideoToFrames.getFrame(originalPath + currentDir + videoFile, frameRate, frameRate, 1)
             
             
             imageArr = VideoToFrames.getFrameArray()
@@ -158,8 +158,8 @@ def toImageValidationFolder( folderName ):
                 imageOnlyArr = imageArr[frame].split('/')[-1]
                 
                 
-                os.replace(str(originalPath)+str(currentDir)+str(imageOnlyArr),
-                           str(originalPath)+str(destinationDir)+str(imageOnlyArr))
+                os.replace(str(originalPath) + str(currentDir) + str(imageOnlyArr),
+                           str(originalPath) + str(destinationDir) + str(imageOnlyArr))
                 
                 
                 os.chdir(originalPath)

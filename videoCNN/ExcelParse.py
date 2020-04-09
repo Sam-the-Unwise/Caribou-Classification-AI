@@ -35,20 +35,6 @@ def getVidQuality( row ):
     vidQual = sheet.cell_value( row, 7 )
     return vidQual
 
-def selectFolder( videoQuality ):
-    quality = videoQuality.lower()
-    if( quality == 'excellent'):
-        return 1
-    elif( quality == "good" or quality == "fair to good"):
-        return 2
-    elif( quality == "poor to fair"):
-        return 3
-    elif( quality == "poor"):
-        return 4
-    elif( quality == "extremely obstructed"):
-        return 5
-    else:
-        return 0
     
 def checkFileExists( file ):
     os.chdir(originalPath+'/Downloads')
@@ -63,12 +49,10 @@ def moveFileToFolder( file, quality ):
     if( quality == 1 ):
         moveToDir = "/VideosBeforeSort/Excellent/"+file
     elif( quality == 2 ):
-        moveToDir = "/VideosBeforeSort/Good/"+file
+        moveToDir = "/VideosBeforeSort/Good_to_Fair/"+file
     elif( quality == 3 ):
-        moveToDir = "/VideosBeforeSort/Fair/"+file
-    elif( quality == 4 ):
         moveToDir = "/VideosBeforeSort/Poor/"+file
-    elif( quality == 5 ):
+    elif( quality == 4 ):
         moveToDir = "/VideosBeforeSort/ExtremelyObstructed/"+file
     else:
         return 0
@@ -76,8 +60,10 @@ def moveFileToFolder( file, quality ):
     
 
 while( row < maxRows ):
+    
     path = pathlib.Path().absolute()
     date = sheet.cell_value(row,2)
+
     if( dateFromString( date ) == 1 ):
         title = sheet.cell_value( row, 0 )
         title = title + ".mp4"
@@ -85,7 +71,7 @@ while( row < maxRows ):
         if( checkFileExists( title ) ):
             print( "moving " + title + "\n")
             
-            moveFileToFolder( title, selectFolder( videoQuality ))
+            moveFileToFolder( title, videoQuality)
 
     row+=1
     
